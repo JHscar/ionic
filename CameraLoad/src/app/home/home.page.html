@@ -1,0 +1,77 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>
+      Camera Test
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+
+<ion-content>
+  <div class="ion-padding">
+
+    <ion-grid>
+      <ion-row class="center">
+        <ion-col size-sm-6>
+          <ion-button size="small" (click)="getPicture(1)">Camera</ion-button>
+        </ion-col>
+        <ion-col size-sm-6>
+          <ion-button size="small" (click)="getPicture(0)">Album</ion-button>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+
+    <ion-item lines="none">
+      <ion-label>Return image file URI</ion-label>
+      <ion-toggle energized [(ngModel)]="useURI"></ion-toggle>
+    </ion-item>
+
+    <ion-card>
+      <ion-card-content class="center">
+        <img *ngIf="!imageData" src="assets/images/no-image.jpeg" />
+        <div #imageCanvas *ngIf="imageData">
+          <img [src]="imageData" crossorigin="anonymous" />
+          <ion-item>Name : {{ name }}</ion-item>
+          <ion-item>Phone : {{ ph_num }}</ion-item>
+        </div>
+      </ion-card-content>
+      <ion-card-header>
+        <ion-card-title>
+          <div *ngIf="useURI">
+            Using URI
+          </div>
+          <div *ngIf="!useURI">
+            Using Base64
+          </div>
+          <p *ngIf="useURI">
+            Your URI is {{imageData}}
+          </p>
+          <p *ngIf="!useURI">
+            Your Base64 image has {{ (imageData + '').length }} bytes
+          </p>
+        </ion-card-title>
+      </ion-card-header>
+    </ion-card>
+
+
+    <ion-card-content *ngIf="imageData">
+      <ion-item>
+        <ion-label position="stacked">Name</ion-label>
+        <ion-input required type="text" [(ngModel)]="myname"></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label position="stacked">Phone</ion-label>
+        <ion-input required type="number" [(ngModel)]="phone"></ion-input>
+      </ion-item>
+      <ion-button color="success" (click)="getinfo()">success</ion-button>
+      <ion-button color="success" (click)="convertIMG()">JPG로 변환</ion-button>
+      <ion-button color="success" (click)="exportPdf()">PDF로 변환</ion-button>
+      <ion-button color="success" (click)="downloadPdf()" [disabled]="!pdfObj" >PDF 열기</ion-button>
+    </ion-card-content>
+
+    <div *ngIf="convertimg">
+      <img [src]="convertimg" crossorigin="anonymous">
+    </div>
+
+  </div>
+</ion-content>

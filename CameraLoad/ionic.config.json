@@ -1,0 +1,7 @@
+{
+  "name": "CameraLoad",
+  "integrations": {
+    "cordova": {}
+  },
+  "type": "angular"
+}
